@@ -42,28 +42,15 @@ class App extends Component {
     }
   }
   onInputChange = (event) => {
-    // console.log(event.target.value);
     this.setState({
       input: event.target.value
     })
   }
 
   calculateFaceLocation = (data) => {
-    // console.log(data);
     const clarifaiFaces = data.outputs[0].data.regions.map(face => {
       return face.region_info.bounding_box
     });
-    console.log(clarifaiFaces);
-    // const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    // const image = document.getElementById('inputImage');
-    // const width = Number(image.width);
-    // const height = Number(image.height);
-    // return {
-    //   left: clarifaiFace.left_col * width,
-    //   topRow: clarifaiFace.top_row * height,
-    //   right: width - (clarifaiFace.right_col * width),
-    //   bottomRow: height - (clarifaiFace.bottom_row * height)
-    // }
     return clarifaiFaces;
   }
 
@@ -80,7 +67,6 @@ class App extends Component {
       Clarifai.FACE_DETECT_MODEL,
       this.state.input
     ).then(response => {
-      // console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
       this.displayFaceBox(this.calculateFaceLocation(response));
     }).catch(err => console.log(err));
   }
@@ -89,7 +75,6 @@ class App extends Component {
     this.setState({
       input: 'http://images.indianexpress.com/2018/01/nicolas-cage-759.jpg'
     }, this.onButtonSubmit)
-    // setTimeout(this.onButtonSubmit, 100);
   }
 
   render() {
