@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.heading {
+  font-size:24px;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: -1;
+}
+
+/* Media Queries */
+
+@media screen and (min-width: 915px) {
+    .heading {
+      margin-top: -50px;
+    }
+}
+
+@media screen and (max-width: 914px) {
+    .heading {
+      margin-top: -20px;
+    }
+    .signout {
+      margin-top: 0;
+    }
+}

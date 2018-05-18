@@ -1,0 +1,24 @@
+.form {
+  width: 500px;
+  background:
+  radial-gradient(white 15%, transparent 16%) 0 0,
+  radial-gradient(white 15%, transparent 16%) 8px 8px,
+  radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+  radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+  background-color:linear-gradient(to left, rgb(99, 225, 175), rgb(251, 119, 229));
+  background-size:16px 16px;
+}
+
+button {
+  /* background: rgb(99, 225, 175);
+  color: rgb(251, 119, 229);
+  text-align: center; */
+  background:
+  radial-gradient(hot-pink 15%, transparent 16%) 0 0,
+  radial-gradient(hot-pink 15%, transparent 16%) 8px 8px,
+  radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+  radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+  background-color:rgb(99, 225, 175);
+  color:white;
+  background-size:16px 16px;
+}
