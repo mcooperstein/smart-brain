@@ -72,8 +72,12 @@ class App extends Component {
   }
 
   onBrainClick = () => {
+    const images = ['http://images.indianexpress.com/2018/01/nicolas-cage-759.jpg', 'http://a.espncdn.com/photo/2011/0328/soc_g_usats_576.jpg', 'https://img.etimg.com/thumb/msid-63429151,width-643,imgsize-59945,resizemode-4/brad-pitt-and-jennifer-aniston-may-give-their-relationship-another-chance.jpg', 'https://i.ytimg.com/vi/qxRxHpaR--Y/hqdefault.jpg', 'https://gabworthy.com/wp-content/uploads/2015/06/Charlie-Sheen-actor-mug-shot-728x730.jpg', 'https://images-production.global.ssl.fastly.net/uploads/photos/file/254389/celeb-mugshots-shia-labouf.png?auto=compress&crop=top&fit=clip&h=500&q=55&w=698', 'http://www.rantlifestyle.com/wp-content/uploads/2014/04/2.-Lindsay-Lohan.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Grant_DeVolson_Wood_-_American_Gothic.jpg/1200px-Grant_DeVolson_Wood_-_American_Gothic.jpg', 'https://cdn.shopify.com/s/files/1/1307/5697/products/product-image-413387377_1024x1024.jpg?v=1511217017',
+    'https://peniazesucas.sk/wp-content/uploads/2015/11/Donald-Trump.png'
+  ];
+    const image = images[Math.floor(Math.random()*images.length)];
     this.setState({
-      input: 'http://images.indianexpress.com/2018/01/nicolas-cage-759.jpg'
+      input: image
     }, this.onButtonSubmit)
   }
 
