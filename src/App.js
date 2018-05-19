@@ -4,6 +4,7 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
@@ -86,14 +87,22 @@ class App extends Component {
       <div className="App">
         <Particles className='particles' params={particlesOptions}/>
         <Navigation />
+
         <p className="heading washed-blue i">
-          {'This Magic Brain will detect faces in images'}
+          {'The Magic Brain will detect faces in images'}
         </p>
         <p className="f4 washed-blue i">
           {'(click the brain to see it in action)'}
         </p>
-        <Logo onBrainClick={this.onBrainClick}/>
-        <Rank />
+        <article class="cf">
+          <div class="fl w-50 tc">
+            <SignIn />
+          </div>
+          <div class="fl w-50 tc">
+            <Logo onBrainClick={this.onBrainClick}/>
+            <Rank />
+          </div>
+        </article>
         <ImageLinkForm value={this.state.input} onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} onBrainClick={this.onBrainClick}/>
         <FaceRecognition boxes={this.state.boxes} imageURL={this.state.imageURL}/>
       </div>

@@ -1,3 +1,4 @@
 .Tilt {
-  background: linear-gradient(to left, rgb(99, 225, 175), rgb(251, 119, 229))
+  /* background: linear-gradient(to left, rgb(99, 225, 175), rgb(251, 119, 229)) */
+  background: b--transparent;
 }
