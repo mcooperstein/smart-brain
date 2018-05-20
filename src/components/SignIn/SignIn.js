@@ -3,11 +3,11 @@ import './SignIn.css';
 
 const SignIn = () => {
   return (
-    <article id='sign-in-form' className="br2 ba dark-gray b--black-10 mv4 w-100 mw5 center">
-      <main className="pa4 black-80">
+    <article id='sign-in-form' className="br2 ba dark-gray b--black-10 mv4 w-100 mw5 center shadow-2">
+      <main className="pa3 black-80">
         <form>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+            <legend className="f2 fw6 ph0 mh0">Sign In</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" for="email-address">Email</label>
               <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
@@ -21,7 +21,7 @@ const SignIn = () => {
             <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in"/>
           </div>
           <div className="lh-copy mt3">
-            <a href="#0" className="f6 link dim black db">Sign up</a>
+            <a href="#0" className="f6 link dim black db">Register</a>
           </div>
         </form>
       </main>
