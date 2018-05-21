@@ -116,30 +116,30 @@ class App extends Component {
 
 
         { this.state.route === 'home' ?
-            <article class="cf">
-              <div class="fl w-100 tc">
+            <article className="cf">
+              <div className="fl w-100 tc">
                 <Logo onBrainClick={this.onBrainClick}/>
-                <Rank />
+                <Rank user={'User: Marc'} rank={'5'}/>
               </div>
             </article>
           :
           ( this.state.route === 'signin' ?
-              <article class="cf">
-                <div class="fl w-50 tc">
+              <article className="cf">
+                <div className="fl w-50 tc">
                   <SignIn onRouteChange={this.onRouteChange}/>
                 </div>
-                <div class="fl w-50 tc">
+                <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>
-                  <Rank />
+                  <Rank user={'Sign In to view your rank...'} rank={'?'}/>
                 </div>
               </article> :
-              <article class="cf">
-                <div class="fl w-50 tc">
+              <article className="cf">
+                <div className="fl w-50 tc">
                   <Register onRouteChange={this.onRouteChange}/>
                 </div>
-                <div class="fl w-50 tc">
+                <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>
-                  <Rank />
+                  <Rank user={'Create a profile to start getting ranked...'} rank={'?'}/>
                 </div>
               </article>
           )
