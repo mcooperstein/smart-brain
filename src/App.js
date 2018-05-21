@@ -39,7 +39,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageURL: '',
-      boxes:[]
+      boxes:[],
+      route: 'signin'
     }
   }
   onInputChange = (event) => {
@@ -94,15 +95,24 @@ class App extends Component {
         <p className="f4 washed-blue i">
           {'(click the brain to see it in action)'}
         </p>
-        <article class="cf">
-          <div class="fl w-50 tc">
-            <SignIn />
-          </div>
-          <div class="fl w-50 tc">
-            <Logo onBrainClick={this.onBrainClick}/>
-            <Rank />
-          </div>
-        </article>
+        { this.state.route === 'signin' ?
+          <article class="cf">
+            <div class="fl w-50 tc">
+              <SignIn />
+            </div>
+            <div class="fl w-50 tc">
+              <Logo onBrainClick={this.onBrainClick}/>
+              <Rank />
+            </div>
+          </article>
+          :
+          <article class="cf">
+            <div class="fl w-100 tc">
+              <Logo onBrainClick={this.onBrainClick}/>
+              <Rank />
+            </div>
+          </article>
+        }
         <ImageLinkForm value={this.state.input} onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} onBrainClick={this.onBrainClick}/>
         <FaceRecognition boxes={this.state.boxes} imageURL={this.state.imageURL}/>
       </div>
