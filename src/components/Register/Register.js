@@ -48,6 +48,9 @@ const Register = (props) => {
           <div className="">
             <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" onClick={() =>props.onRouteChange('home')}/>
           </div>
+          <div className="lh-copy mt3">
+            <p onClick={() =>props.onRouteChange('signin')} className="pointer f6 link dim black db">Already a member? Sign In</p>
+          </div>
         </form>
       </main>
     </article>
