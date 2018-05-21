@@ -1,0 +1,17 @@
+#register-form {
+  max-width:400px;
+}
+
+form {
+  width: 100%;
+}
+
+#name {
+  width: 203px;
+}
+
+@media screen and (max-width: 515px) {
+  .adjusted-input {
+    width: 170px
+  }
+}

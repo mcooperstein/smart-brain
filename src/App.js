@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
+import Register from './components/Register/Register';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
@@ -114,23 +115,35 @@ class App extends Component {
 
 
 
-        { this.state.route === 'signin' ?
-          <article class="cf">
-            <div class="fl w-50 tc">
-              <SignIn onRouteChange={this.onRouteChange}/>
-            </div>
-            <div class="fl w-50 tc">
-              <Logo onBrainClick={this.onBrainClick}/>
-              <Rank />
-            </div>
-          </article>
+        { this.state.route === 'home' ?
+            <article class="cf">
+              <div class="fl w-100 tc">
+                <Logo onBrainClick={this.onBrainClick}/>
+                <Rank />
+              </div>
+            </article>
           :
-          <article class="cf">
-            <div class="fl w-100 tc">
-              <Logo onBrainClick={this.onBrainClick}/>
-              <Rank />
-            </div>
-          </article>
+          ( this.state.route === 'signin' ?
+              <article class="cf">
+                <div class="fl w-50 tc">
+                  <SignIn onRouteChange={this.onRouteChange}/>
+                </div>
+                <div class="fl w-50 tc">
+                  <Logo onBrainClick={this.onBrainClick}/>
+                  <Rank />
+                </div>
+              </article> :
+              <article class="cf">
+                <div class="fl w-50 tc">
+                  <Register onRouteChange={this.onRouteChange}/>
+                </div>
+                <div class="fl w-50 tc">
+                  <Logo onBrainClick={this.onBrainClick}/>
+                  <Rank />
+                </div>
+              </article>
+          )
+
         }
         <ImageLinkForm value={this.state.input} onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} onBrainClick={this.onBrainClick}/>
         <FaceRecognition boxes={this.state.boxes} imageURL={this.state.imageURL}/>
