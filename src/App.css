@@ -26,11 +26,19 @@
     .heading {
       margin-top: -50px;
     }
+    .home-heading {
+      margin-top: 30px;
+      font-size:24px;
+    }
 }
 
 @media screen and (max-width: 914px) {
     .heading {
       margin-top: -20px;
+    }
+    .home-heading {
+      margin-top: 30px;
+      font-size:24px;
     }
     .signout {
       margin-top: 0;

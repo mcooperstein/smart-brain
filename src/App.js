@@ -83,22 +83,41 @@ class App extends Component {
     }, this.onButtonSubmit)
   }
 
+  onRouteChange = (route) => {
+    this.setState({route: route})
+  }
+
   render() {
     return (
       <div className="App">
         <Particles className='particles' params={particlesOptions}/>
-        <Navigation />
+        { this.state.route === 'home' ?
+          <div>
+            <Navigation onRouteChange={this.onRouteChange}/>
+            <p className="heading washed-blue i">
+              {'The Magic Brain will detect faces in images'}
+            </p>
+            <p className="f4 washed-blue i">
+              {'(click the brain to see it in action)'}
+            </p>
+          </div>
+           :
+          <div>
+            <p className="home-heading washed-blue i">
+              {'The Magic Brain will detect faces in images'}
+            </p>
+            <p className="f4 washed-blue i">
+              {'(click the brain to see it in action)'}
+            </p>
+          </div>
+        }
 
-        <p className="heading washed-blue i">
-          {'The Magic Brain will detect faces in images'}
-        </p>
-        <p className="f4 washed-blue i">
-          {'(click the brain to see it in action)'}
-        </p>
+
+
         { this.state.route === 'signin' ?
           <article class="cf">
             <div class="fl w-50 tc">
-              <SignIn />
+              <SignIn onRouteChange={this.onRouteChange}/>
             </div>
             <div class="fl w-50 tc">
               <Logo onBrainClick={this.onBrainClick}/>
