@@ -26,7 +26,7 @@ const Demographics = (props) => {
         <h3>Facial Features:{genderGuess[0]}% {genders[0]}</h3>
       </div>
       <div id='ageAppearance'>
-        <h3>Age prediction:{ages[0]}, Certainty: {Math.round(percentages[0])}%</h3>
+        <h3>Age prediction:{ages[0]} yrs old, Certainty: {Math.round(percentages[0])}%</h3>
       </div>
       <div id='culturalAppearance'>
         <h3>Possible Ethnicities:</h3>
