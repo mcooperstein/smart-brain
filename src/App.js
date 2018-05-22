@@ -5,6 +5,7 @@ import Rank from './components/Rank/Rank';
 import Register from './components/Register/Register';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import Demographics from './components/FaceRecognition/Demographics';
 import SignIn from './components/SignIn/SignIn';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
@@ -41,7 +42,10 @@ class App extends Component {
       input: '',
       imageURL: '',
       boxes:[],
-      route: 'signin'
+      route: 'signin',
+      age: [],
+      gender: [],
+      cultural: []
     }
   }
   onInputChange = (event) => {
@@ -57,6 +61,27 @@ class App extends Component {
     return clarifaiFaces;
   }
 
+  calculateAge = (data) => {
+    const demographics = data.outputs[0].data.regions[0].data.face.age_appearance.concepts.map(face => {
+      return face
+    });
+    return demographics;
+  }
+
+  calculateGender = (data) => {
+    const demographics = data.outputs[0].data.regions[0].data.face.gender_appearance.concepts.map(face => {
+      return face
+    });
+    return demographics;
+  }
+
+  calculateEthnicity = (data) => {
+    const demographics = data.outputs[0].data.regions[0].data.face.multicultural_appearance.concepts.map(face => {
+      return face
+    });
+    return demographics;
+  }
+
   displayFaceBox = (boxes) => {
     console.log(boxes);
     this.setState({
@@ -64,12 +89,44 @@ class App extends Component {
     })
   }
 
+  displayAge = (demographics) => {
+    // console.log(demographics);
+    this.setState({
+      age: demographics
+    })
+  }
+
+  displayGender = (demographics) => {
+    // console.log(demographics);
+    this.setState({
+      gender: demographics
+    })
+  }
+
+  displayEthnicity = (demographics) => {
+    // console.log(demographics);
+    this.setState({
+      cultural: demographics
+    })
+  }
+
   onButtonSubmit = () => {
     this.setState({imageURL: this.state.input})
+    app.models.predict(
+      "c0c0ac362b03416da06ab3fa36fb58e3",
+      this.state.input
+    ).then(response => {
+      // console.log(response);
+      this.displayAge(this.calculateAge(response));
+      this.displayGender(this.calculateGender(response));
+      this.displayEthnicity(this.calculateEthnicity(response));
+    }).catch(err => console.log(err));
+
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL,
       this.state.input
     ).then(response => {
+      // console.log(response);
       this.displayFaceBox(this.calculateFaceLocation(response));
     }).catch(err => console.log(err));
   }
@@ -146,6 +203,7 @@ class App extends Component {
 
         }
         <ImageLinkForm value={this.state.input} onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} onBrainClick={this.onBrainClick}/>
+        { this.state.imageURL === '' ? null : <Demographics boxes={this.state.boxes} age={this.state.age} gender={this.state.gender} cultural={this.state.cultural}/>}
         <FaceRecognition boxes={this.state.boxes} imageURL={this.state.imageURL}/>
       </div>
     );

@@ -24,19 +24,6 @@ const FaceRecognition = (props) => {
             }}></div>
         })}
       </div>
-      { props.imageURL === '' ? null:
-        <div>
-          <div id='genderAppearance'>
-            <h1>Gender Appearance</h1>
-          </div>
-          <div id='ageAppearance'>
-            <h1>Age Appearance</h1>
-          </div>
-          <div id='culturalAppearance'>
-            <h1>Cultural Appearance</h1>
-          </div>
-        </div>
-      }
     </div>
   )
 }
