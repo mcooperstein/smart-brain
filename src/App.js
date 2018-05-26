@@ -48,6 +48,13 @@ class App extends Component {
       cultural: []
     }
   }
+
+  // componentDidMount(){
+  //   fetch('http://localhost:3000/')
+  //   .then(response => response.json())
+  //   .then(console.log)
+  // }
+
   onInputChange = (event) => {
     this.setState({
       input: event.target.value
