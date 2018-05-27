@@ -31,8 +31,8 @@ const Demographics = (props) => {
       <div id='culturalAppearance'>
         <h3>Possible Ethnicities:</h3>
         <ul>
-          {ethnicities.map(guess => {
-            return <li style={{listStyleType: 'none'}}>{guess.name}: {(guess.value * 100).toFixed(2)}%</li>
+          {ethnicities.map((guess,index) => {
+            return <li key={index} style={{listStyleType: 'none'}}>{guess.name}: {(guess.value * 100).toFixed(2)}%</li>
           })}
         </ul>
       </div>

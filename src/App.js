@@ -155,6 +155,20 @@ class App extends Component {
       this.state.input
     ).then(response => {
       // console.log(response);
+      if(response) {
+        fetch('http://localhost:3000/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          // changes entries property without changing entire user object
+          this.setState(Object.assign(this.state.user, {entries: count}));
+        })
+      }
       this.displayFaceBox(this.calculateFaceLocation(response));
     }).catch(err => console.log(err));
   }
