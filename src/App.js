@@ -43,6 +43,14 @@ class App extends Component {
       imageURL: '',
       boxes:[],
       route: 'signin',
+      isLoggedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      },
       age: [],
       gender: [],
       cultural: []
@@ -54,6 +62,19 @@ class App extends Component {
   //   .then(response => response.json())
   //   .then(console.log)
   // }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      },
+      isLoggedIn: true
+    })
+  }
 
   onInputChange = (event) => {
     this.setState({
@@ -149,7 +170,13 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    this.setState({route: route})
+    this.setState({route: route}, () => {
+      if(this.state.route !== 'home') {
+        this.setState({
+          isLoggedIn: false
+        })
+      }
+    })
   }
 
   render() {
@@ -183,27 +210,40 @@ class App extends Component {
             <article className="cf">
               <div className="fl w-100 tc">
                 <Logo onBrainClick={this.onBrainClick}/>
-                <Rank user={'User: Marc'} rank={'5'}/>
+                <Rank
+                  user={this.state.user.name}
+                  rank={'#1'}
+                  entries={this.state.user.entries}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
               </div>
             </article>
           :
           ( this.state.route === 'signin' ?
               <article className="cf">
                 <div className="fl w-50 tc">
-                  <SignIn onRouteChange={this.onRouteChange}/>
+                  <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
                 </div>
                 <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>
-                  <Rank user={'Sign In to view your rank...'} rank={'?'}/>
+                  <Rank
+                    user={'Sign In to view your rank...'}
+                    rank={'?'}
+                    isLoggedIn={this.state.isLoggedIn}
+                  />
                 </div>
               </article> :
               <article className="cf">
                 <div className="fl w-50 tc">
-                  <Register onRouteChange={this.onRouteChange}/>
+                  <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
                 </div>
                 <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>
-                  <Rank user={'Create a profile to start getting ranked...'} rank={'?'}/>
+                  <Rank
+                    user={'Create a profile to start getting ranked...'}
+                    rank={'?'}
+                    isLoggedIn={this.state.isLoggedIn}
+                  />
                 </div>
               </article>
           )
