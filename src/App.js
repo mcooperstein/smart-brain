@@ -34,34 +34,31 @@ const particlesOptions = {
   }
 }
 
+const initialState = {
+  input: '',
+  imageURL: '',
+  boxes:[],
+  route: 'signin',
+  isLoggedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  },
+  age: [],
+  gender: [],
+  cultural: []
+}
+
 class App extends Component {
   constructor(){
     super()
 
-    this.state = {
-      input: '',
-      imageURL: '',
-      boxes:[],
-      route: 'signin',
-      isLoggedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: ''
-      },
-      age: [],
-      gender: [],
-      cultural: []
-    }
-  }
+    this.state = initialState;
 
-  // componentDidMount(){
-  //   fetch('http://localhost:3000/')
-  //   .then(response => response.json())
-  //   .then(console.log)
-  // }
+  }
 
   loadUser = (data) => {
     this.setState({
@@ -111,28 +108,24 @@ class App extends Component {
   }
 
   displayFaceBox = (boxes) => {
-    console.log(boxes);
     this.setState({
       boxes: boxes
     })
   }
 
   displayAge = (demographics) => {
-    // console.log(demographics);
     this.setState({
       age: demographics
     })
   }
 
   displayGender = (demographics) => {
-    // console.log(demographics);
     this.setState({
       gender: demographics
     })
   }
 
   displayEthnicity = (demographics) => {
-    // console.log(demographics);
     this.setState({
       cultural: demographics
     })
@@ -144,7 +137,6 @@ class App extends Component {
       "c0c0ac362b03416da06ab3fa36fb58e3",
       this.state.input
     ).then(response => {
-      // console.log(response);
       this.displayAge(this.calculateAge(response));
       this.displayGender(this.calculateGender(response));
       this.displayEthnicity(this.calculateEthnicity(response));
@@ -154,7 +146,6 @@ class App extends Component {
       Clarifai.FACE_DETECT_MODEL,
       this.state.input
     ).then(response => {
-      // console.log(response);
       if(response) {
         fetch('http://localhost:3000/image', {
           method: 'put',
@@ -168,6 +159,7 @@ class App extends Component {
           // changes entries property without changing entire user object
           this.setState(Object.assign(this.state.user, {entries: count}));
         })
+        .catch(err => console.log(err))
       }
       this.displayFaceBox(this.calculateFaceLocation(response));
     }).catch(err => console.log(err));
@@ -185,13 +177,8 @@ class App extends Component {
 
   onRouteChange = (route) => {
     this.setState({route: route}, () => {
-      if(this.state.route !== 'home') {
-        this.setState({
-          input: '',
-          imageURL: '',
-          boxes:[],
-          isLoggedIn: false
-        })
+      if(this.state.route == 'signin') {
+        this.setState(initialState)
       }
     })
   }
