@@ -187,6 +187,9 @@ class App extends Component {
     this.setState({route: route}, () => {
       if(this.state.route !== 'home') {
         this.setState({
+          input: '',
+          imageURL: '',
+          boxes:[],
           isLoggedIn: false
         })
       }
