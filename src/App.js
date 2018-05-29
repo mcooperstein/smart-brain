@@ -8,12 +8,12 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Demographics from './components/FaceRecognition/Demographics';
 import SignIn from './components/SignIn/SignIn';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
+// import Clarifai from 'clarifai';
 import './App.css';
 
-const app = new Clarifai.App({
-  apiKey: 'a0535ef45dfd4d75b2498a2f651fafca'
-})
+// const app = new Clarifai.App({
+//   apiKey: 'a0535ef45dfd4d75b2498a2f651fafca'
+// })
 
 const particlesOptions = {
   particles: {
@@ -133,36 +133,47 @@ class App extends Component {
 
   onButtonSubmit = async() => {
     await this.setState({imageURL: this.state.input})
-    await app.models.predict(
-      "c0c0ac362b03416da06ab3fa36fb58e3",
-      this.state.input
-    ).then(response => {
-      this.displayAge(this.calculateAge(response));
-      this.displayGender(this.calculateGender(response));
-      this.displayEthnicity(this.calculateEthnicity(response));
-    }).catch(err => console.log(err));
 
-    await app.models.predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input
-    ).then(response => {
-      if(response) {
-        fetch('http://localhost:3000/image', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: this.state.user.id
+    await fetch('http://localhost:3000/imageurl', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
+      .then(response => response.json())
+      .then(response => {
+        if(response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
           })
+          .then(response => response.json())
+          .then(count => {
+            // changes entries property without changing entire user object
+            this.setState(Object.assign(this.state.user, {entries: count}));
+          })
+          .catch(err => console.log(err))
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      }).catch(err => console.log(err));
+
+    await fetch('http://localhost:3000/demographics', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
         })
-        .then(response => response.json())
-        .then(count => {
-          // changes entries property without changing entire user object
-          this.setState(Object.assign(this.state.user, {entries: count}));
-        })
-        .catch(err => console.log(err))
-      }
-      this.displayFaceBox(this.calculateFaceLocation(response));
-    }).catch(err => console.log(err));
+      })
+      .then(response => response.json())
+      .then(response => {
+        this.displayAge(this.calculateAge(response));
+        this.displayGender(this.calculateGender(response));
+        this.displayEthnicity(this.calculateEthnicity(response));
+      }).catch(err => console.log(err));
   }
 
   onBrainClick = () => {
