@@ -134,7 +134,7 @@ class App extends Component {
   onButtonSubmit = async() => {
     await this.setState({imageURL: this.state.input})
 
-    await fetch('http://localhost:3000/imageurl', {
+    await fetch('https://agile-fortress-66285.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -144,7 +144,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if(response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://agile-fortress-66285.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -161,7 +161,7 @@ class App extends Component {
         this.displayFaceBox(this.calculateFaceLocation(response));
       }).catch(err => console.log(err));
 
-    await fetch('http://localhost:3000/demographics', {
+    await fetch('https://agile-fortress-66285.herokuapp.com/demographics', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
