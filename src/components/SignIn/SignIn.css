@@ -5,3 +5,8 @@
 form {
   width: 100%;
 }
+
+#failed {
+  text-align: center;
+  font-size: 12px;
+}

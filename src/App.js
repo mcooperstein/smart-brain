@@ -45,8 +45,10 @@ const initialState = {
     name: '',
     email: '',
     entries: 0,
-    joined: ''
+    joined: '',
+    rank: ''
   },
+  totalUsers: '',
   age: [],
   gender: [],
   cultural: []
@@ -71,6 +73,14 @@ class App extends Component {
       },
       isLoggedIn: true
     })
+  }
+
+  loadUserRank = (data) => {
+    this.setState(Object.assign(this.state.user, {rank: data}));
+  }
+
+  getTotalUsers = (data) => {
+    this.setState({totalUsers: data});
   }
 
   onInputChange = (event) => {
@@ -227,7 +237,8 @@ class App extends Component {
                 <Logo onBrainClick={this.onBrainClick}/>
                 <Rank
                   user={this.state.user.name}
-                  rank={'#1'}
+                  rank={this.state.user.rank}
+                  totalUsers={this.state.totalUsers}
                   entries={this.state.user.entries}
                   isLoggedIn={this.state.isLoggedIn}
                 />
@@ -237,7 +248,7 @@ class App extends Component {
           ( this.state.route === 'signin' ?
               <article className="cf">
                 <div className="fl w-50 tc">
-                  <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                  <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser} loadUserRank={this.loadUserRank} getTotalUsers={this.getTotalUsers}/>
                 </div>
                 <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>
@@ -250,7 +261,7 @@ class App extends Component {
               </article> :
               <article className="cf">
                 <div className="fl w-50 tc">
-                  <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                  <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} loadUserRank={this.loadUserRank} getTotalUsers={this.getTotalUsers}/>
                 </div>
                 <div className="fl w-50 tc">
                   <Logo onBrainClick={this.onBrainClick}/>

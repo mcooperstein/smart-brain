@@ -7,7 +7,8 @@ class SignIn extends React.Component {
 
     this.state = {
       signInEmail: '',
-      signInPassword: ''
+      signInPassword: '',
+      failed: false
     }
   }
 
@@ -19,9 +20,9 @@ class SignIn extends React.Component {
     this.setState({signInPassword: event.target.value})
   }
 
-  onSubmitSignIn = () => {
+  onSubmitSignIn = async() => {
     // console.log(this.state);
-    fetch('https://agile-fortress-66285.herokuapp.com/signin', {
+    await fetch('https://agile-fortress-66285.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -34,8 +35,36 @@ class SignIn extends React.Component {
       if(user.id){
         this.props.loadUser(user);
         this.props.onRouteChange('home');
+      } else {
+        this.setState({failed: true})
       }
     })
+
+    await fetch('https://agile-fortress-66285.herokuapp.com/rank', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword
+      })
+    })
+    .then(response => response.json())
+    .then(users => {
+      if(users.length){
+        users.sort((a,b) => b.entries - a.entries);
+        // this.props.loadUserRank(users.indexOf())
+        let index = users.findIndex(user => user.email === this.state.signInEmail)
+        // console.log(index);
+        this.props.loadUserRank(index+1);
+        this.props.getTotalUsers(users.length);
+      } else {
+        console.log('error retrieving rank')
+      }
+    })
+    .then(user => {
+
+    })
+
     // .then(data => {
     //   if(data === 'success'){
     //     this.props.onRouteChange('home')
@@ -63,6 +92,7 @@ class SignIn extends React.Component {
             <div className="">
               <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" onClick={() => this.onSubmitSignIn()}/>
             </div>
+            { this.state.failed ? <p id='failed'>Invalid username/password<br/> combination</p> : null}
             <div className="lh-copy mt3">
               <p onClick={() => onRouteChange('register')} className="pointer f6 link dim black db">Register</p>
             </div>
