@@ -65,28 +65,6 @@ class Register extends React.Component {
       }
     })
 
-    // await fetch('https://agile-fortress-66285.herokuapp.com/getranks', {
-    //   method: 'post',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({
-    //     email: this.state.signInEmail,
-    //     password: this.state.signInPassword,
-    //     name: this.state.name
-    //   })
-    // })
-    // .then(response => response.json())
-    // .then(users => {
-    //   if(users.length){
-    //     users.sort((a,b) => b.entries - a.entries);
-    //     // this.props.loadUserRank(users.indexOf())
-    //     let index = users.findIndex(user => user.email === this.state.signInEmail)
-    //     // console.log(index);
-    //     this.props.loadUserRank(index+1);
-    //     this.props.getTotalUsers(users.length);
-    //   } else {
-    //     console.log('error retrieving rank')
-    //   }
-    // })
   }
 
   render(){

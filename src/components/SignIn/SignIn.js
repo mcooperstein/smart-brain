@@ -52,24 +52,13 @@ class SignIn extends React.Component {
     .then(users => {
       if(users.length){
         users.sort((a,b) => b.entries - a.entries);
-        // this.props.loadUserRank(users.indexOf())
         let index = users.findIndex(user => user.email === this.state.signInEmail)
-        // console.log(index);
         this.props.loadUserRank(index+1);
         this.props.getTotalUsers(users.length);
       } else {
         console.log('error retrieving rank')
       }
     })
-    .then(user => {
-
-    })
-
-    // .then(data => {
-    //   if(data === 'success'){
-    //     this.props.onRouteChange('home')
-    //   }
-    // })
   }
 
   render(){
